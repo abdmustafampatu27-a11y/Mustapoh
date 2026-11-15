@@ -650,6 +650,21 @@ function findHeaderRow_(matrix) {
   return bestIndex;
 }
 
+function findHubColumn_(headers) {
+  const aliases = [
+    'hub', 'hub name', 'nama hub', 'station', 'station name',
+    'site', 'facility', 'branch', 'location', 'lokasi', 'area'
+  ];
+
+  for (let i = 0; i < headers.length; i++) {
+    const header = headers[i].toLowerCase().replace(/[_-]/g, ' ').trim();
+    if (aliases.some(function(alias) {
+      return header === alias || header.indexOf(alias) !== -1;
+    })) return i;
+  }
+  return -1;
+}
+
 function findMetricColumns_(headers, rows) {
   const excluded = [
     'id', 'nik', 'phone', 'telephone', 'latitude', 'longitude',
